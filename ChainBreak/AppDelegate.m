@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize CardImage0;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
