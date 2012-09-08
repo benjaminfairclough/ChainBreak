@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B58414F315FA527E00E6D0AE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = B58414F215FA527E00E6D0AE /* Card.m */; };
 		B5DAAB5015F8178E00835E3A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DAAB4F15F8178E00835E3A /* Cocoa.framework */; };
 		B5DAAB5A15F8178E00835E3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5DAAB5815F8178E00835E3A /* InfoPlist.strings */; };
 		B5DAAB5C15F8178E00835E3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DAAB5B15F8178E00835E3A /* main.m */; };
@@ -72,6 +73,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B58414F115FA527E00E6D0AE /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		B58414F215FA527E00E6D0AE /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		B5DAAB4B15F8178E00835E3A /* ChainBreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChainBreak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5DAAB4F15F8178E00835E3A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B5DAAB5215F8178E00835E3A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -194,6 +197,8 @@
 		B5DAAB5515F8178E00835E3A /* ChainBreak */ = {
 			isa = PBXGroup;
 			children = (
+				B58414F115FA527E00E6D0AE /* Card.h */,
+				B58414F215FA527E00E6D0AE /* Card.m */,
 				B5DAAB6C15F817D300835E3A /* Delegates */,
 				B5DAAB6415F8178E00835E3A /* MainMenu.xib */,
 				B5DAAB5615F8178E00835E3A /* Supporting Files */,
@@ -424,6 +429,7 @@
 			files = (
 				B5DAAB5C15F8178E00835E3A /* main.m in Sources */,
 				B5DAAB6315F8178E00835E3A /* AppDelegate.m in Sources */,
+				B58414F315FA527E00E6D0AE /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +555,7 @@
 				B5DAAB6B15F8178E00835E3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
