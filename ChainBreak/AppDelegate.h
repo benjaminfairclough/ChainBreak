@@ -8,43 +8,53 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Card.h"
+#import "Player.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (strong) IBOutlet NSImageView *cardImage0;
-@property (strong) IBOutlet NSImageView *cardImage1;
-@property (strong) IBOutlet NSImageView *cardImage2;
-@property (strong) IBOutlet NSImageView *cardImage3;
-@property (strong) IBOutlet NSImageView *cardImage4;
-@property (strong) IBOutlet NSImageView *cardImage5;
-@property (strong) IBOutlet NSImageView *cardImage6;
-@property (strong) IBOutlet NSImageView *cardImage7;
-@property (strong) IBOutlet NSImageView *cardImage8;
-@property (strong) IBOutlet NSImageView *cardImage9;
-@property (strong) IBOutlet NSImageView *cardImage10;
-@property (strong) IBOutlet NSImageView *cardImage11;
-@property (strong) IBOutlet NSImageView *cardImage12;
-@property (strong) IBOutlet NSImageView *cardImage13;
-@property (strong) IBOutlet NSImageView *cardImage14;
-@property (strong) IBOutlet NSImageView *cardImage15;
-@property (strong) IBOutlet NSImageView *cardImage16;
-@property (strong) IBOutlet NSImageView *cardImage17;
-@property (strong) IBOutlet NSImageView *cardImage18;
-@property (strong) IBOutlet NSImageView *cardImage19;
-@property (strong) IBOutlet NSImageView *cardImage20;
-@property (strong) IBOutlet NSImageView *cardImage21;
-@property (strong) IBOutlet NSImageView *cardImage22;
-@property (strong) IBOutlet NSImageView *cardImage23;
-@property (strong) IBOutlet NSImageView *cardImage24;
-@property (strong) IBOutlet NSImageView *cardImage25;
-@property (strong) IBOutlet NSImageView *cardImage26;
-@property (strong) IBOutlet NSImageView *cardImage27;
-@property (strong) IBOutlet NSImageView *cardImage28;
-@property (strong) IBOutlet NSImageView *cardImage29;
+@property (strong) IBOutlet NSButton *cardImage0;
+@property (strong) IBOutlet NSButton *cardImage1;
+@property (strong) IBOutlet NSButton *cardImage2;
+@property (strong) IBOutlet NSButton *cardImage3;
+@property (strong) IBOutlet NSButton *cardImage4;
+@property (strong) IBOutlet NSButton *cardImage5;
+@property (strong) IBOutlet NSButton *cardImage6;
+@property (strong) IBOutlet NSButton *cardImage7;
+@property (strong) IBOutlet NSButton *cardImage8;
+@property (strong) IBOutlet NSButton *cardImage9;
+@property (strong) IBOutlet NSButton *cardImage10;
+@property (strong) IBOutlet NSButton *cardImage11;
+@property (strong) IBOutlet NSButton *cardImage12;
+@property (strong) IBOutlet NSButton *cardImage13;
+@property (strong) IBOutlet NSButton *cardImage14;
+@property (strong) IBOutlet NSButton *cardImage15;
+@property (strong) IBOutlet NSButton *cardImage16;
+@property (strong) IBOutlet NSButton *cardImage17;
+@property (strong) IBOutlet NSButton *cardImage18;
+@property (strong) IBOutlet NSButton *cardImage19;
+@property (strong) IBOutlet NSButton *cardImage20;
+@property (strong) IBOutlet NSButton *cardImage21;
+@property (strong) IBOutlet NSButton *cardImage22;
+@property (strong) IBOutlet NSButton *cardImage23;
+@property (strong) IBOutlet NSButton *cardImage24;
+@property (strong) IBOutlet NSButton *cardImage25;
+@property (strong) IBOutlet NSButton *cardImage26;
+@property (strong) IBOutlet NSButton *cardImage27;
+@property (strong) IBOutlet NSButton *cardImage28;
+@property (strong) IBOutlet NSButton *cardImage29;
+
+@property (strong) IBOutlet NSImageView *playerOneSelectedCard;
+@property (strong) IBOutlet NSImageView *playerTwoSelectedCard;
+@property (strong) IBOutlet NSButton *playerOneSelectedCardMenu;
+@property (strong) IBOutlet NSButton *playerTwoSelectedCardMenu;
+
 
 @property (strong) NSMutableArray *fullDeck;
 @property (strong) NSMutableArray *gameDeck;
+
+@property (strong) Player *playerOne;
+@property (strong) Player *playerTwo;
 
 @property (strong) Card *aceSpades;
 @property (strong) Card *aceDiamonds;
@@ -100,6 +110,9 @@
 @property (strong) Card *kingClub;
 
 - (IBAction)newCardsFromArray:(id)sender;
+- (IBAction)playerCardSelect:(id)sender;
+- (IBAction)claimSpaces:(id)sender;
+
 
 
 @end

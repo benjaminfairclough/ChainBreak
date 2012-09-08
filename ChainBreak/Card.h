@@ -12,7 +12,7 @@
 
 @property (strong) NSString *name;
 @property (strong) NSString *suit;
-@property int value;
+@property int cValue;
 @property (strong) NSString *cardImageName;
 @property bool isMultipleOf3;
 @property bool isMultipleOf4;

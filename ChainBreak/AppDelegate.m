@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import "Card.h"
+#import "Player.h"
 #import <stdlib.h>
 #import <time.h>
 
 @implementation AppDelegate
 @synthesize cardImage0, cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11, cardImage12, cardImage13, cardImage14, cardImage15, cardImage16, cardImage17, cardImage18, cardImage19, cardImage20, cardImage21, cardImage22, cardImage23, cardImage24, cardImage25, cardImage26, cardImage27, cardImage28, cardImage29;
 @synthesize fullDeck, gameDeck;
+@synthesize playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -21,6 +23,12 @@
     
     //init rand seed
     srand(time(NULL));
+    
+    // init two players
+    _playerOne      = [[Player alloc]init];
+    _playerTwo      = [[Player alloc]init];
+    
+    [_playerOne setIsTurn:true];
     
     // init all 52 cards in array
     _aceClub        = [[Card alloc]initWithName:@"Ace"      suit:@"Club"    andValue:11];
@@ -199,6 +207,33 @@
     [cardImage28 setImage:[NSImage imageNamed:[gameDeck[28] cardImageName]]];
     [cardImage29 setImage:[NSImage imageNamed:[gameDeck[29] cardImageName]]];
 }
+
+- (IBAction)playerCardSelect:(id)sender {
+    
+    if ([_playerOne isTurn]) {
+        [playerOneSelectedCard setImage:[sender image]];
+        [[playerOneSelectedCardMenu menu] setTitle:@"Suits"];
+        [[[playerOneSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
+        [[[playerOneSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
+        [[[playerOneSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
+        [[[playerOneSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
+        [[[playerOneSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
+    }
+    else {
+        [playerTwoSelectedCard setImage:[sender image]];
+    }
+    
+}
+
+- (IBAction)claimSpaces:(id)sender {
+    if ([_playerOne isTurn]) {
+    }
+    else {
+
+    }
+}
+
+
 
 
 @end
