@@ -12,8 +12,8 @@
 
 @property int score;
 @property int place;
-@property bool isTurn;
+@property int playerId;
 
--(id)init;
+-(id)initWithId:(int) playerId;
 
 @end

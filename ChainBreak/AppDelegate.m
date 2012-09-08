@@ -15,7 +15,7 @@
 @implementation AppDelegate
 @synthesize cardImage0, cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11, cardImage12, cardImage13, cardImage14, cardImage15, cardImage16, cardImage17, cardImage18, cardImage19, cardImage20, cardImage21, cardImage22, cardImage23, cardImage24, cardImage25, cardImage26, cardImage27, cardImage28, cardImage29;
 @synthesize fullDeck, gameDeck, thirtyCardDeck;
-@synthesize playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu;
+@synthesize currentPlayer = _currentPlayer, playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu, playerOneScoreText, playerTwoScoreText;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -25,10 +25,10 @@
     srand(time(NULL));
     
     // init two players
-    _playerOne      = [[Player alloc]init];
-    _playerTwo      = [[Player alloc]init];
+    _playerOne      = [[Player alloc]initWithId:1];
+    _playerTwo      = [[Player alloc]initWithId:2];
     
-    [_playerOne setIsTurn:true];
+    _currentPlayer = 1;
     
     // init all 52 cards in array
     _aceClub        = [[Card alloc]initWithName:@"Ace"      suit:@"Club"    andValue:11];
@@ -219,8 +219,9 @@
 
 - (IBAction)playerCardSelect:(id)sender {
     
-    if ([_playerOne isTurn]) {
+    if ([self currentPlayer] == [_playerOne playerId]) {
         [playerOneSelectedCard setImage:[sender image]];
+        [playerOneSelectedCard setTag:[sender tag]];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
@@ -229,7 +230,7 @@
     }
     else {
         [playerTwoSelectedCard setImage:[sender image]];
-        [playerTwoSelectedCard setImage:[sender image]];
+        [playerTwoSelectedCard setTag:[sender tag]];
         [[[playerTwoSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
         [[[playerTwoSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
         [[[playerTwoSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
@@ -240,12 +241,35 @@
 }
 
 - (IBAction)claimSpaces:(id)sender {
-    if ([_playerOne isTurn]) {
+    int y, x;
+
+    if ([self currentPlayer] == [_playerOne playerId]) {
+        // figure out the selected cards position in thirtyCardDeck
+        y = [playerOneSelectedCard tag] / 6;
+        x = [playerOneSelectedCard tag] % 6;
+        
+        [self checkSurroudingSpacesForCardWithPositionY:y andPositionX:x withOption:[[playerOneSelectedCardMenu selectedItem] title] forPlayer:_playerOne];
         
     }
     else {
+        // figure out the selected cards position in thirtyCardDeck
+        y = [playerTwoSelectedCard tag] / 6;
+        x = [playerTwoSelectedCard tag] % 6;
 
     }
+}
+
+- (void)checkSurroudingSpacesForCardWithPositionY:(int)y andPositionX:(int)x withOption:(NSString *)cardRestriction forPlayer:(Player *)player {
+    if ([cardRestriction isEqualToString:@"Same Suit"]) {
+        if([thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x-1] suit] ) {
+            [player setScore:([player score] + 1)];
+        }
+    }
+    [self updateGame];
+}
+
+- (void) updateGame {
+    [playerOneScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerOne score]]];
 }
 
 

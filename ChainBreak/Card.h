@@ -14,6 +14,7 @@
 @property (strong) NSString *suit;
 @property int cValue;
 @property (strong) NSString *cardImageName;
+@property (strong) NSImage *cardImage;
 @property bool isMultipleOf3;
 @property bool isMultipleOf4;
 @property bool isMultipleOf5;

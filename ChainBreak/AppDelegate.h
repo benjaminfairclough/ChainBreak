@@ -44,10 +44,13 @@
 @property (strong) IBOutlet NSButton *cardImage28;
 @property (strong) IBOutlet NSButton *cardImage29;
 
+@property (strong) IBOutlet NSTextField *playerOneScoreText;
+@property (strong) IBOutlet NSTextField *playerTwoScoreText;
+
 @property (strong) IBOutlet NSImageView *playerOneSelectedCard;
 @property (strong) IBOutlet NSImageView *playerTwoSelectedCard;
-@property (strong) IBOutlet NSButton *playerOneSelectedCardMenu;
-@property (strong) IBOutlet NSButton *playerTwoSelectedCardMenu;
+@property (strong) IBOutlet NSPopUpButton *playerOneSelectedCardMenu;
+@property (strong) IBOutlet NSPopUpButton *playerTwoSelectedCardMenu;
 
 
 @property (strong) NSMutableArray *fullDeck;
@@ -56,6 +59,8 @@
 
 @property (strong) Player *playerOne;
 @property (strong) Player *playerTwo;
+
+@property int currentPlayer;
 
 @property (strong) Card *aceSpades;
 @property (strong) Card *aceDiamonds;
@@ -113,6 +118,8 @@
 - (IBAction)newCardsFromArray:(id)sender;
 - (IBAction)playerCardSelect:(id)sender;
 - (IBAction)claimSpaces:(id)sender;
+- (void)checkSurroudingSpacesForCardWithPositionY:(int) y andPositionX:(int) x withOption:(NSString*) cardRestriction forPlayer:(Player*) player;
+- (void)updateGame;
 
 
 

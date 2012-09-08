@@ -9,13 +9,13 @@
 #import "Player.h"
 
 @implementation Player
-@synthesize score = _score, place = _place, isTurn = _isTurn;
+@synthesize score = _score, place = _place, playerId = _playerId;
 
--(id)init {
+-(id)initWithId:(int) playerId {
     self = [super init];
     _score = 0;
     _place = 1;
-    _isTurn = false;
+    _playerId = playerId;
     
     return self;
 }
