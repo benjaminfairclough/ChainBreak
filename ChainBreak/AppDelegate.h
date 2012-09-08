@@ -52,6 +52,7 @@
 
 @property (strong) NSMutableArray *fullDeck;
 @property (strong) NSMutableArray *gameDeck;
+@property (strong) NSMutableArray *thirtyCardDeck;
 
 @property (strong) Player *playerOne;
 @property (strong) Player *playerTwo;

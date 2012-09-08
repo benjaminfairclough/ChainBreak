@@ -14,7 +14,7 @@
 
 @implementation AppDelegate
 @synthesize cardImage0, cardImage1, cardImage2, cardImage3, cardImage4, cardImage5, cardImage6, cardImage7, cardImage8, cardImage9, cardImage10, cardImage11, cardImage12, cardImage13, cardImage14, cardImage15, cardImage16, cardImage17, cardImage18, cardImage19, cardImage20, cardImage21, cardImage22, cardImage23, cardImage24, cardImage25, cardImage26, cardImage27, cardImage28, cardImage29;
-@synthesize fullDeck, gameDeck;
+@synthesize fullDeck, gameDeck, thirtyCardDeck;
 @synthesize playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu;
 
 
@@ -142,7 +142,7 @@
                 nil];
     
     gameDeck = [[NSMutableArray alloc] init];
-    
+    thirtyCardDeck = [[NSMutableArray alloc] init];
     
     
     [self newCardsFromArray:nil];
@@ -155,6 +155,7 @@
     NSMutableArray *tempCards = [[NSMutableArray alloc]initWithArray:fullDeck];
     NSMutableArray *tempCards2 = [[NSMutableArray alloc]init];
     int randCardIndex;
+    [thirtyCardDeck removeAllObjects];
     
     // 3 loops to shuffle around the 30 cards
     for (int i = 0; i < 30; i++) {
@@ -176,43 +177,50 @@
         [tempCards2 removeObjectAtIndex:(NSUInteger)randCardIndex];
     }
     
-    [cardImage0 setImage:[NSImage imageNamed:[gameDeck[0] cardImageName]]];
-    [cardImage1 setImage:[NSImage imageNamed:[gameDeck[1] cardImageName]]];
-    [cardImage2 setImage:[NSImage imageNamed:[gameDeck[2] cardImageName]]];
-    [cardImage3 setImage:[NSImage imageNamed:[gameDeck[3] cardImageName]]];
-    [cardImage4 setImage:[NSImage imageNamed:[gameDeck[4] cardImageName]]];
-    [cardImage5 setImage:[NSImage imageNamed:[gameDeck[5] cardImageName]]];
-    [cardImage6 setImage:[NSImage imageNamed:[gameDeck[6] cardImageName]]];
-    [cardImage7 setImage:[NSImage imageNamed:[gameDeck[7] cardImageName]]];
-    [cardImage8 setImage:[NSImage imageNamed:[gameDeck[8] cardImageName]]];
-    [cardImage9 setImage:[NSImage imageNamed:[gameDeck[9] cardImageName]]];
-    [cardImage10 setImage:[NSImage imageNamed:[gameDeck[10] cardImageName]]];
-    [cardImage11 setImage:[NSImage imageNamed:[gameDeck[11] cardImageName]]];
-    [cardImage12 setImage:[NSImage imageNamed:[gameDeck[12] cardImageName]]];
-    [cardImage13 setImage:[NSImage imageNamed:[gameDeck[13] cardImageName]]];
-    [cardImage14 setImage:[NSImage imageNamed:[gameDeck[14] cardImageName]]];
-    [cardImage15 setImage:[NSImage imageNamed:[gameDeck[15] cardImageName]]];
-    [cardImage16 setImage:[NSImage imageNamed:[gameDeck[16] cardImageName]]];
-    [cardImage17 setImage:[NSImage imageNamed:[gameDeck[17] cardImageName]]];
-    [cardImage18 setImage:[NSImage imageNamed:[gameDeck[18] cardImageName]]];
-    [cardImage19 setImage:[NSImage imageNamed:[gameDeck[19] cardImageName]]];
-    [cardImage20 setImage:[NSImage imageNamed:[gameDeck[20] cardImageName]]];
-    [cardImage21 setImage:[NSImage imageNamed:[gameDeck[21] cardImageName]]];
-    [cardImage22 setImage:[NSImage imageNamed:[gameDeck[22] cardImageName]]];
-    [cardImage23 setImage:[NSImage imageNamed:[gameDeck[23] cardImageName]]];
-    [cardImage24 setImage:[NSImage imageNamed:[gameDeck[24] cardImageName]]];
-    [cardImage25 setImage:[NSImage imageNamed:[gameDeck[25] cardImageName]]];
-    [cardImage26 setImage:[NSImage imageNamed:[gameDeck[26] cardImageName]]];
-    [cardImage27 setImage:[NSImage imageNamed:[gameDeck[27] cardImageName]]];
-    [cardImage28 setImage:[NSImage imageNamed:[gameDeck[28] cardImageName]]];
-    [cardImage29 setImage:[NSImage imageNamed:[gameDeck[29] cardImageName]]];
+    for (int y = 0; y < 5; y++) {
+        NSMutableArray *inner = [[NSMutableArray alloc] init];
+        for (int x = 0; x < 6; x++) {
+            [inner addObject:gameDeck[y*6 + x]];
+        }
+        [thirtyCardDeck addObject:inner];
+    }
+    
+    [cardImage0 setImage:[NSImage imageNamed:[thirtyCardDeck[0][0] cardImageName]]];
+    [cardImage1 setImage:[NSImage imageNamed:[thirtyCardDeck[0][1] cardImageName]]];
+    [cardImage2 setImage:[NSImage imageNamed:[thirtyCardDeck[0][2] cardImageName]]];
+    [cardImage3 setImage:[NSImage imageNamed:[thirtyCardDeck[0][3] cardImageName]]];
+    [cardImage4 setImage:[NSImage imageNamed:[thirtyCardDeck[0][4] cardImageName]]];
+    [cardImage5 setImage:[NSImage imageNamed:[thirtyCardDeck[0][5] cardImageName]]];
+    [cardImage6 setImage:[NSImage imageNamed:[thirtyCardDeck[1][0] cardImageName]]];
+    [cardImage7 setImage:[NSImage imageNamed:[thirtyCardDeck[1][1] cardImageName]]];
+    [cardImage8 setImage:[NSImage imageNamed:[thirtyCardDeck[1][2]cardImageName]]];
+    [cardImage9 setImage:[NSImage imageNamed:[thirtyCardDeck[1][3] cardImageName]]];
+    [cardImage10 setImage:[NSImage imageNamed:[thirtyCardDeck[1][4] cardImageName]]];
+    [cardImage11 setImage:[NSImage imageNamed:[thirtyCardDeck[1][5] cardImageName]]];
+    [cardImage12 setImage:[NSImage imageNamed:[thirtyCardDeck[2][0] cardImageName]]];
+    [cardImage13 setImage:[NSImage imageNamed:[thirtyCardDeck[2][1] cardImageName]]];
+    [cardImage14 setImage:[NSImage imageNamed:[thirtyCardDeck[2][2] cardImageName]]];
+    [cardImage15 setImage:[NSImage imageNamed:[thirtyCardDeck[2][3] cardImageName]]];
+    [cardImage16 setImage:[NSImage imageNamed:[thirtyCardDeck[2][4] cardImageName]]];
+    [cardImage17 setImage:[NSImage imageNamed:[thirtyCardDeck[2][5] cardImageName]]];
+    [cardImage18 setImage:[NSImage imageNamed:[thirtyCardDeck[3][0] cardImageName]]];
+    [cardImage19 setImage:[NSImage imageNamed:[thirtyCardDeck[3][1] cardImageName]]];
+    [cardImage20 setImage:[NSImage imageNamed:[thirtyCardDeck[3][2] cardImageName]]];
+    [cardImage21 setImage:[NSImage imageNamed:[thirtyCardDeck[3][3] cardImageName]]];
+    [cardImage22 setImage:[NSImage imageNamed:[thirtyCardDeck[3][4] cardImageName]]];
+    [cardImage23 setImage:[NSImage imageNamed:[thirtyCardDeck[3][5] cardImageName]]];
+    [cardImage24 setImage:[NSImage imageNamed:[thirtyCardDeck[4][0] cardImageName]]];
+    [cardImage25 setImage:[NSImage imageNamed:[thirtyCardDeck[4][1] cardImageName]]];
+    [cardImage26 setImage:[NSImage imageNamed:[thirtyCardDeck[4][2] cardImageName]]];
+    [cardImage27 setImage:[NSImage imageNamed:[thirtyCardDeck[4][3] cardImageName]]];
+    [cardImage28 setImage:[NSImage imageNamed:[thirtyCardDeck[4][4] cardImageName]]];
+    [cardImage29 setImage:[NSImage imageNamed:[thirtyCardDeck[4][5] cardImageName]]];
 }
 
 - (IBAction)playerCardSelect:(id)sender {
     
     if ([_playerOne isTurn]) {
         [playerOneSelectedCard setImage:[sender image]];
-        [[playerOneSelectedCardMenu menu] setTitle:@"Suits"];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
         [[[playerOneSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
@@ -221,12 +229,19 @@
     }
     else {
         [playerTwoSelectedCard setImage:[sender image]];
+        [playerTwoSelectedCard setImage:[sender image]];
+        [[[playerTwoSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
+        [[[playerTwoSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
+        [[[playerTwoSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
+        [[[playerTwoSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
+        [[[playerTwoSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
     }
     
 }
 
 - (IBAction)claimSpaces:(id)sender {
     if ([_playerOne isTurn]) {
+        
     }
     else {
 
