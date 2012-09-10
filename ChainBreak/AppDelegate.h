@@ -51,6 +51,10 @@
 @property (strong) IBOutlet NSImageView *playerTwoSelectedCard;
 @property (strong) IBOutlet NSPopUpButton *playerOneSelectedCardMenu;
 @property (strong) IBOutlet NSPopUpButton *playerTwoSelectedCardMenu;
+@property (strong) IBOutlet NSImageView *playerOnePositionImage;
+@property (strong) IBOutlet NSImageView *playerTwoPositionImage;
+@property (strong) IBOutlet NSButton *playerOneClaimButton;
+@property (strong) IBOutlet NSButton *playerTwoClaimButton;
 
 
 @property (strong) NSMutableArray *fullDeck;
@@ -119,6 +123,7 @@
 - (IBAction)playerCardSelect:(id)sender;
 - (IBAction)claimSpaces:(id)sender;
 - (void)checkSurroudingSpacesForCardWithPositionY:(int) y andPositionX:(int) x withOption:(NSString*) cardRestriction forPlayer:(Player*) player;
+- (void)updatePlayerPosition;
 - (void)updateGame;
 
 

@@ -13,6 +13,7 @@
 @property int score;
 @property int place;
 @property int playerId;
+@property bool hasSelectedCardForTurn;
 
 -(id)initWithId:(int) playerId;
 

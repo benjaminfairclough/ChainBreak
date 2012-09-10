@@ -15,11 +15,16 @@
 @implementation AppDelegate
 @synthesize cardButton0, cardButton1, cardButton2, cardButton3, cardButton4, cardButton5, cardButton6, cardButton7, cardButton8, cardButton9, cardButton10, cardButton11, cardButton12, cardButton13, cardButton14, cardButton15, cardButton16, cardButton17, cardButton18, cardButton19, cardButton20, cardButton21, cardButton22, cardButton23, cardButton24, cardButton25, cardButton26, cardButton27, cardButton28, cardButton29;
 @synthesize fullDeck, gameDeck, thirtyCardDeck;
-@synthesize currentPlayer = _currentPlayer, playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu, playerOneScoreText, playerTwoScoreText;
+@synthesize currentPlayer = _currentPlayer, playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu, playerOneScoreText, playerTwoScoreText, playerOnePositionImage, playerTwoPositionImage, playerOneClaimButton, playerTwoClaimButton;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    
+    // set game Defaults
+    _currentPlayer = 1;
+    [playerOneScoreText setStringValue:@"0"];
+    [playerTwoScoreText setStringValue:@"0"];
     
     //init rand seed
     srand(time(NULL));
@@ -28,7 +33,6 @@
     _playerOne      = [[Player alloc]initWithId:1];
     _playerTwo      = [[Player alloc]initWithId:2];
     
-    _currentPlayer = 1;
     
     // init all 52 cards in array
     _aceClub        = [[Card alloc]initWithName:@"Ace"      suit:@"Club"    value:11    andImage:[NSImage imageNamed:@"Ace_Club.png"]];
@@ -146,8 +150,6 @@
     
     
     [self newCardsFromArray:nil];
-    
-    
 }
 
 
@@ -218,24 +220,44 @@
 }
 
 - (IBAction)playerCardSelect:(id)sender {
+    int y, x;
     
-    if ([self currentPlayer] == [_playerOne playerId]) {
-        [playerOneSelectedCard setImage:[sender image]];
-        [playerOneSelectedCard setTag:[sender tag]];
-        [[[playerOneSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
-        [[[playerOneSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
-        [[[playerOneSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
-        [[[playerOneSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
-        [[[playerOneSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
+    y = [sender tag] / 6;
+    x = [sender tag] % 6;
+    
+    if ([thirtyCardDeck[y][x] ownedById] == 0) {
+
+        if ([self currentPlayer] == [_playerOne playerId]) {
+            [playerOneSelectedCardMenu selectItemAtIndex:0];
+            [_playerOne setHasSelectedCardForTurn:true];
+            [playerOneSelectedCard setImage:[sender image]];
+            [playerOneSelectedCard setTag:[sender tag]];
+            [[[playerOneSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
+            [[[playerOneSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
+            [[[playerOneSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
+            [[[playerOneSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
+            [[[playerOneSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
+        }
+        else {
+            [playerTwoSelectedCardMenu selectItemAtIndex:0];
+            [_playerTwo setHasSelectedCardForTurn:true];
+            [playerTwoSelectedCard setImage:[sender image]];
+            [playerTwoSelectedCard setTag:[sender tag]];
+            [[[playerTwoSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
+            [[[playerTwoSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
+            [[[playerTwoSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
+            [[[playerTwoSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
+            [[[playerTwoSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
+        }
     }
     else {
-        [playerTwoSelectedCard setImage:[sender image]];
-        [playerTwoSelectedCard setTag:[sender tag]];
-        [[[playerTwoSelectedCardMenu menu] itemAtIndex:1] setEnabled:[gameDeck[[sender tag]] checkIfPrime:[gameDeck[[sender tag]] cValue]]];
-        [[[playerTwoSelectedCardMenu menu] itemAtIndex:2] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf3:[gameDeck[[sender tag]] cValue]]];
-        [[[playerTwoSelectedCardMenu menu] itemAtIndex:3] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf4:[gameDeck[[sender tag]] cValue]]];
-        [[[playerTwoSelectedCardMenu menu] itemAtIndex:4] setEnabled:[gameDeck[[sender tag]] checkIfMultipleOf5:[gameDeck[[sender tag]] cValue]]];
-        [[[playerTwoSelectedCardMenu menu] itemAtIndex:5] setEnabled:[gameDeck[[sender tag]] checkIfFace:[gameDeck[[sender tag]] name]]];
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Game Rules"];
+        [alert setInformativeText:@"You can't select a card that is owned by another player. Please choose another card."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
     }
     
 }
@@ -243,33 +265,144 @@
 - (IBAction)claimSpaces:(id)sender {
     int y, x;
 
-    if ([self currentPlayer] == [_playerOne playerId]) {
+    if ([_playerOne hasSelectedCardForTurn] && [self currentPlayer] == [_playerOne playerId]) {
         // figure out the selected cards position in thirtyCardDeck
         y = [playerOneSelectedCard tag] / 6;
         x = [playerOneSelectedCard tag] % 6;
-        
         [self checkSurroudingSpacesForCardWithPositionY:y andPositionX:x withOption:[[playerOneSelectedCardMenu selectedItem] title] forPlayer:_playerOne];
+        [self updateGame];
         
     }
-    else {
+    else if([_playerTwo hasSelectedCardForTurn] && [self currentPlayer] == [_playerTwo playerId]){
         // figure out the selected cards position in thirtyCardDeck
         y = [playerTwoSelectedCard tag] / 6;
         x = [playerTwoSelectedCard tag] % 6;
+        
+        [self checkSurroudingSpacesForCardWithPositionY:y andPositionX:x withOption:[[playerTwoSelectedCardMenu selectedItem] title] forPlayer:_playerTwo];
+        [self updateGame];
 
+    }
+    else {
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Game Rules"];
+        [alert setInformativeText:@"You have to select a card if you want to play."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        
+        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        
     }
 }
 
 - (void)checkSurroudingSpacesForCardWithPositionY:(int)y andPositionX:(int)x withOption:(NSString *)cardRestriction forPlayer:(Player *)player {
     if ([cardRestriction isEqualToString:@"Same Suit"]) {
-        if([thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x-1] suit] ) {
+        //claim selected card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        [player setScore:([player score] + 1)];
+        
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x-1] suit] ) {
             [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+        }
+        if((y-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+        }
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x+1] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+        }
+        if((x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y][x-1] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+        }
+        if((x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y][x+1] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+        }
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x-1] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+        }
+        if((y+1) <= 4 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+        }
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x+1] suit] ) {
+            [player setScore:([player score] + 1)];
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
         }
     }
-    [self updateGame];
 }
 
-- (void) updateGame {
+- (void)updateGame {
+    // update score
     [playerOneScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerOne score]]];
+    [playerTwoScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerTwo score]]];
+    [self updatePlayerPosition];
+    
+    // disable player controls
+    if (_currentPlayer == 1) {
+        [playerOneSelectedCard setEnabled:false];
+        [playerOneSelectedCardMenu setEnabled:false];
+        [playerOneClaimButton setEnabled:false];
+        
+    }
+    
+    else if (_currentPlayer == 2) {
+        [playerTwoSelectedCard setEnabled:false];
+        [playerTwoSelectedCardMenu setEnabled:false];
+        [playerTwoClaimButton setEnabled:false];
+    }
+    
+    // set the next player to play as currentPlayer
+    if (_currentPlayer < 2) {
+        _currentPlayer++;
+    }
+    else {
+        _currentPlayer = 1;
+    }
+    
+    // enable player controls
+    // disable player controls
+    if (_currentPlayer == 1) {
+        [playerOneSelectedCard setEnabled:true];
+        [playerOneSelectedCard setImage:nil];
+        [playerOneSelectedCardMenu setEnabled:true];
+        [playerOneClaimButton setEnabled:true];
+        [_playerOne setHasSelectedCardForTurn:false];
+    }
+    
+    else if (_currentPlayer == 2) {
+        [playerTwoSelectedCard setEnabled:true];
+        [playerTwoSelectedCard setImage:nil];
+        [playerTwoSelectedCardMenu setEnabled:true];
+        [playerTwoClaimButton setEnabled:true];
+        [_playerTwo setHasSelectedCardForTurn:false];
+    }
+    
+}
+
+- (void)updatePlayerPosition {
+    if ([_playerOne score] > [_playerTwo score]) {
+        [playerOnePositionImage setImage:[NSImage imageNamed:@"1st.png"]];
+        [playerTwoPositionImage setImage:[NSImage imageNamed:@"2nd.png"]];
+    }
+    else if ([_playerTwo score] > [_playerOne score]) {
+        [playerOnePositionImage setImage:[NSImage imageNamed:@"2nd.png"]];
+        [playerTwoPositionImage setImage:[NSImage imageNamed:@"1st.png"]];
+    }
+    else {
+        [playerOnePositionImage setImage:[NSImage imageNamed:@"1st.png"]];
+        [playerTwoPositionImage setImage:[NSImage imageNamed:@"1st.png"]];
+    }
+    
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+        
+
 }
 
 

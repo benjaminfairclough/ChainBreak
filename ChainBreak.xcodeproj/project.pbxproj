@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B58414F315FA527E00E6D0AE /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = B58414F215FA527E00E6D0AE /* Card.m */; };
 		B58414F715FADCA500E6D0AE /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B58414F615FADCA500E6D0AE /* Player.m */; };
+		B5C8779E15FC3847006F7203 /* PokerChip_Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C8779C15FC3847006F7203 /* PokerChip_Blue.png */; };
+		B5C8779F15FC3847006F7203 /* PokerChip_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = B5C8779D15FC3847006F7203 /* PokerChip_Red.png */; };
 		B5DAAB5015F8178E00835E3A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DAAB4F15F8178E00835E3A /* Cocoa.framework */; };
 		B5DAAB5A15F8178E00835E3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5DAAB5815F8178E00835E3A /* InfoPlist.strings */; };
 		B5DAAB5C15F8178E00835E3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DAAB5B15F8178E00835E3A /* main.m */; };
@@ -78,6 +80,8 @@
 		B58414F215FA527E00E6D0AE /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		B58414F515FADCA500E6D0AE /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B58414F615FADCA500E6D0AE /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		B5C8779C15FC3847006F7203 /* PokerChip_Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PokerChip_Blue.png; sourceTree = "<group>"; };
+		B5C8779D15FC3847006F7203 /* PokerChip_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PokerChip_Red.png; sourceTree = "<group>"; };
 		B5DAAB4B15F8178E00835E3A /* ChainBreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChainBreak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5DAAB4F15F8178E00835E3A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B5DAAB5215F8178E00835E3A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -161,6 +165,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B58414F815FBC82F00E6D0AE /* Poker Chips */ = {
+			isa = PBXGroup;
+			children = (
+				B5C8779C15FC3847006F7203 /* PokerChip_Blue.png */,
+				B5C8779D15FC3847006F7203 /* PokerChip_Red.png */,
+			);
+			name = "Poker Chips";
+			sourceTree = "<group>";
+		};
 		B5DAAB4015F8178E00835E3A = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +249,7 @@
 		B5DAAB7015F81BF000835E3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B58414F815FBC82F00E6D0AE /* Poker Chips */,
 				B5DAABDA15F848D100835E3A /* 1st.png */,
 				B5DAABDB15F848D100835E3A /* 2nd.png */,
 				B5DAABDC15F848D100835E3A /* 3rd.png */,
@@ -414,6 +428,8 @@
 				B5DAABDF15F848D100835E3A /* 2nd.png in Resources */,
 				B5DAABE015F848D100835E3A /* 3rd.png in Resources */,
 				B5DAABE115F848D100835E3A /* 4th.png in Resources */,
+				B5C8779E15FC3847006F7203 /* PokerChip_Blue.png in Resources */,
+				B5C8779F15FC3847006F7203 /* PokerChip_Red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

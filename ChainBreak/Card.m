@@ -9,7 +9,7 @@
 #import "Card.h"
 
 @implementation Card
-@synthesize name = _name, suit = _suit, cValue = _value, isMultipleOf3 = _isMultipleOf3, isMultipleOf4 = _isMultipleOf4, isMultipleOf5 = _isMultipleOf5, isPrime = _isPrime, isFace = _isFace, cardImage = _cardImage;
+@synthesize name = _name, suit = _suit, cValue = _value, isMultipleOf3 = _isMultipleOf3, isMultipleOf4 = _isMultipleOf4, isMultipleOf5 = _isMultipleOf5, isPrime = _isPrime, isFace = _isFace, cardImage = _cardImage, ownedById = _ownedById;
 
 -(id)initWithName:(NSString *)cardName suit:(NSString *)cardSuit value:(int)cardValue andImage:(NSImage *)cardImage {
     self = [super init];
@@ -17,6 +17,7 @@
     _name = cardName;
     _suit = cardSuit;
     _value = cardValue;
+    _ownedById = 0;
     _cardImage = cardImage;
     _isMultipleOf3 = [self checkIfMultipleOf3:cardValue];
     _isMultipleOf4 = [self checkIfMultipleOf4:cardValue];
