@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ChainBreak/AppDelegate.m"
-         timestampString = "368931114.575604"
+         timestampString = "368941691.627496"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "223"
-         endingLineNumber = "223"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
          landmarkName = "-playerCardSelect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ChainBreak/AppDelegate.m"
-         timestampString = "368934230.532734"
+         timestampString = "368941691.627496"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "298"
-         endingLineNumber = "298"
-         landmarkName = "-checkSurroudingSpacesForCardWithPositionY:andPositionX:withOption:forPlayer:"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
+         landmarkName = "-claimSpaces:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

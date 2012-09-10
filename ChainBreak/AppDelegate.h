@@ -44,6 +44,38 @@
 @property (strong) IBOutlet NSButton *cardButton28;
 @property (strong) IBOutlet NSButton *cardButton29;
 
+@property (strong) IBOutlet NSImageView *cardPokerChip0;
+@property (strong) IBOutlet NSImageView *cardPokerChip1;
+@property (strong) IBOutlet NSImageView *cardPokerChip2;
+@property (strong) IBOutlet NSImageView *cardPokerChip3;
+@property (strong) IBOutlet NSImageView *cardPokerChip4;
+@property (strong) IBOutlet NSImageView *cardPokerChip5;
+@property (strong) IBOutlet NSImageView *cardPokerChip6;
+@property (strong) IBOutlet NSImageView *cardPokerChip7;
+@property (strong) IBOutlet NSImageView *cardPokerChip8;
+@property (strong) IBOutlet NSImageView *cardPokerChip9;
+@property (strong) IBOutlet NSImageView *cardPokerChip10;
+@property (strong) IBOutlet NSImageView *cardPokerChip11;
+@property (strong) IBOutlet NSImageView *cardPokerChip12;
+@property (strong) IBOutlet NSImageView *cardPokerChip13;
+@property (strong) IBOutlet NSImageView *cardPokerChip14;
+@property (strong) IBOutlet NSImageView *cardPokerChip15;
+@property (strong) IBOutlet NSImageView *cardPokerChip16;
+@property (strong) IBOutlet NSImageView *cardPokerChip17;
+@property (strong) IBOutlet NSImageView *cardPokerChip18;
+@property (strong) IBOutlet NSImageView *cardPokerChip19;
+@property (strong) IBOutlet NSImageView *cardPokerChip20;
+@property (strong) IBOutlet NSImageView *cardPokerChip21;
+@property (strong) IBOutlet NSImageView *cardPokerChip22;
+@property (strong) IBOutlet NSImageView *cardPokerChip23;
+@property (strong) IBOutlet NSImageView *cardPokerChip24;
+@property (strong) IBOutlet NSImageView *cardPokerChip25;
+@property (strong) IBOutlet NSImageView *cardPokerChip26;
+@property (strong) IBOutlet NSImageView *cardPokerChip27;
+@property (strong) IBOutlet NSImageView *cardPokerChip28;
+@property (strong) IBOutlet NSImageView *cardPokerChip29;
+
+
 @property (strong) IBOutlet NSTextField *playerOneScoreText;
 @property (strong) IBOutlet NSTextField *playerTwoScoreText;
 
@@ -125,6 +157,8 @@
 - (void)checkSurroudingSpacesForCardWithPositionY:(int) y andPositionX:(int) x withOption:(NSString*) cardRestriction forPlayer:(Player*) player;
 - (void)updatePlayerPosition;
 - (void)updateGame;
+- (void)calculatePlayerScores;
+- (NSImageView *)searchForImageWithTag:(int)cardTag;
 
 
 

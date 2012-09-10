@@ -13,7 +13,9 @@
 #import <time.h>
 
 @implementation AppDelegate
+@synthesize playerOne = _playerOne, playerTwo = _playerTwo;
 @synthesize cardButton0, cardButton1, cardButton2, cardButton3, cardButton4, cardButton5, cardButton6, cardButton7, cardButton8, cardButton9, cardButton10, cardButton11, cardButton12, cardButton13, cardButton14, cardButton15, cardButton16, cardButton17, cardButton18, cardButton19, cardButton20, cardButton21, cardButton22, cardButton23, cardButton24, cardButton25, cardButton26, cardButton27, cardButton28, cardButton29;
+@synthesize cardPokerChip0, cardPokerChip1, cardPokerChip2, cardPokerChip3, cardPokerChip4, cardPokerChip5, cardPokerChip6, cardPokerChip7, cardPokerChip8, cardPokerChip9, cardPokerChip10, cardPokerChip11, cardPokerChip12, cardPokerChip13, cardPokerChip14, cardPokerChip15, cardPokerChip16, cardPokerChip17, cardPokerChip18, cardPokerChip19, cardPokerChip20, cardPokerChip21, cardPokerChip22, cardPokerChip23, cardPokerChip24, cardPokerChip25, cardPokerChip26, cardPokerChip27, cardPokerChip28, cardPokerChip29;
 @synthesize fullDeck, gameDeck, thirtyCardDeck;
 @synthesize currentPlayer = _currentPlayer, playerOneSelectedCard, playerTwoSelectedCard, playerOneSelectedCardMenu, playerTwoSelectedCardMenu, playerOneScoreText, playerTwoScoreText, playerOnePositionImage, playerTwoPositionImage, playerOneClaimButton, playerTwoClaimButton;
 
@@ -217,6 +219,51 @@
     [cardButton27 setImage:[thirtyCardDeck[4][3] cardImage]];
     [cardButton28 setImage:[thirtyCardDeck[4][4] cardImage]];
     [cardButton29 setImage:[thirtyCardDeck[4][5] cardImage]];
+    
+    //reset old game data
+    _currentPlayer = 2;
+    
+    for (int y = 0; y < 5; y++) {
+        for (int x = 0; x < 6; x++) {
+            [thirtyCardDeck[y][x] setOwnedById:0];
+        }
+    }
+    
+    [cardPokerChip0 setImage:nil];
+    [cardPokerChip1 setImage:nil];
+    [cardPokerChip2 setImage:nil];
+    [cardPokerChip3 setImage:nil];
+    [cardPokerChip4 setImage:nil];
+    [cardPokerChip5 setImage:nil];
+    [cardPokerChip6 setImage:nil];
+    [cardPokerChip7 setImage:nil];
+    [cardPokerChip8 setImage:nil];
+    [cardPokerChip9 setImage:nil];
+    [cardPokerChip10 setImage:nil];
+    [cardPokerChip11 setImage:nil];
+    [cardPokerChip12 setImage:nil];
+    [cardPokerChip13 setImage:nil];
+    [cardPokerChip14 setImage:nil];
+    [cardPokerChip15 setImage:nil];
+    [cardPokerChip16 setImage:nil];
+    [cardPokerChip17 setImage:nil];
+    [cardPokerChip18 setImage:nil];
+    [cardPokerChip19 setImage:nil];
+    [cardPokerChip20 setImage:nil];
+    [cardPokerChip21 setImage:nil];
+    [cardPokerChip22 setImage:nil];
+    [cardPokerChip23 setImage:nil];
+    [cardPokerChip24 setImage:nil];
+    [cardPokerChip25 setImage:nil];
+    [cardPokerChip26 setImage:nil];
+    [cardPokerChip27 setImage:nil];
+    [cardPokerChip28 setImage:nil];
+    [cardPokerChip29 setImage:nil];
+    
+    [self updateGame];
+    
+    _currentPlayer = 1;
+    
 }
 
 - (IBAction)playerCardSelect:(id)sender {
@@ -297,49 +344,129 @@
 
 - (void)checkSurroudingSpacesForCardWithPositionY:(int)y andPositionX:(int)x withOption:(NSString *)cardRestriction forPlayer:(Player *)player {
     if ([cardRestriction isEqualToString:@"Same Suit"]) {
-        //claim selected card
+        //claim center card
         [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
-        [player setScore:([player score] + 1)];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
         
         if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x-1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
         }
         if((y-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y-1][x+1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y][x-1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y][x+1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x-1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((y+1) <= 4 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
         if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y][x] suit] == [thirtyCardDeck[y+1][x+1] suit] ) {
-            [player setScore:([player score] + 1)];
+            
             [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
         }
     }
 }
 
 - (void)updateGame {
     // update score
-    [playerOneScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerOne score]]];
-    [playerTwoScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerTwo score]]];
+    [self calculatePlayerScores];
     [self updatePlayerPosition];
     
     // disable player controls
@@ -398,6 +525,294 @@
         [playerTwoPositionImage setImage:[NSImage imageNamed:@"1st.png"]];
     }
     
+}
+
+- (void)calculatePlayerScores {
+    [_playerOne setScore:0];
+    [_playerTwo setScore:0];
+    
+    if ([[[cardPokerChip0 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip0 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip1 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip1 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip2 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip2 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip3 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip3 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip4 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip4 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip5 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip5 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip6 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip6 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip7 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip7 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip8 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip8 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip9 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip9 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip10 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip10 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip11 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip11 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip12 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip12 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip13 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip13 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip14 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip14 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip15 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip15 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip16 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip16 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip17 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip17 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip18 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip18 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip19 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip19 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip20 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip20 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip21 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip21 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip22 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip22 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip23 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip23 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip24 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip24 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip25 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip25 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip26 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip26 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip27 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip27 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip28 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip28 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    if ([[[cardPokerChip29 image] name] isEqualToString:@"PokerChip_Red"]) {
+        [_playerOne setScore:[_playerOne score]+1];
+    }
+    else if ([[[cardPokerChip29 image] name] isEqualToString:@"PokerChip_Blue"]) {
+        [_playerTwo setScore:[_playerTwo score]+1];
+    }
+    
+    //update score textfields
+    [playerOneScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerOne score]]];
+    [playerTwoScoreText setStringValue:[NSString stringWithFormat:@"%d",[_playerTwo score]]];
+}
+    
+
+
+- (NSImageView *)searchForImageWithTag:(int)cardTag {
+    if ((int)[cardPokerChip0 tag] == cardTag) {
+        return cardPokerChip0;
+    }
+    else if ((int)[cardPokerChip1 tag] == cardTag) {
+        return cardPokerChip1;
+    }
+    else if ((int)[cardPokerChip2 tag] == cardTag) {
+        return cardPokerChip2;
+    }
+    else if ((int)[cardPokerChip3 tag] == cardTag) {
+        return cardPokerChip3;
+    }
+    else if ((int)[cardPokerChip4 tag] == cardTag) {
+        return cardPokerChip4;
+    }
+    else if ((int)[cardPokerChip5 tag] == cardTag) {
+        return cardPokerChip5;
+    }
+    else if ((int)[cardPokerChip6 tag] == cardTag) {
+        return cardPokerChip6;
+    }
+    else if ((int)[cardPokerChip7 tag] == cardTag) {
+        return cardPokerChip7;
+    }
+    else if ((int)[cardPokerChip8 tag] == cardTag) {
+        return cardPokerChip8;
+    }
+    else if ((int)[cardPokerChip9 tag] == cardTag) {
+        return cardPokerChip9;
+    }
+    else if ((int)[cardPokerChip10 tag] == cardTag) {
+        return cardPokerChip10;
+    }
+    else if ((int)[cardPokerChip11 tag] == cardTag) {
+        return cardPokerChip11;
+    }
+    else if ((int)[cardPokerChip12 tag] == cardTag) {
+        return cardPokerChip12;
+    }
+    else if ((int)[cardPokerChip13 tag] == cardTag) {
+        return cardPokerChip13;
+    }
+    else if ((int)[cardPokerChip14 tag] == cardTag) {
+        return cardPokerChip14;
+    }
+    else if ((int)[cardPokerChip15 tag] == cardTag) {
+        return cardPokerChip15;
+    }
+    else if ((int)[cardPokerChip16 tag] == cardTag) {
+        return cardPokerChip16;
+    }
+    else if ((int)[cardPokerChip17 tag] == cardTag) {
+        return cardPokerChip17;
+    }
+    else if ((int)[cardPokerChip18 tag] == cardTag) {
+        return cardPokerChip18;
+    }
+    else if ((int)[cardPokerChip19 tag] == cardTag) {
+        return cardPokerChip19;
+    }
+    else if ((int)[cardPokerChip20 tag] == cardTag) {
+        return cardPokerChip20;
+    }
+    else if ((int)[cardPokerChip21 tag] == cardTag) {
+        return cardPokerChip21;
+    }
+    else if ((int)[cardPokerChip22 tag] == cardTag) {
+        return cardPokerChip22;
+    }
+    else if ((int)[cardPokerChip23 tag] == cardTag) {
+        return cardPokerChip23;
+    }
+    else if ((int)[cardPokerChip24 tag] == cardTag) {
+        return cardPokerChip24;
+    }
+    else if ((int)[cardPokerChip25 tag] == cardTag) {
+        return cardPokerChip25;
+    }
+    else if ((int)[cardPokerChip26 tag] == cardTag) {
+        return cardPokerChip26;
+    }
+    else if ((int)[cardPokerChip27 tag] == cardTag) {
+        return cardPokerChip27;
+    }
+    else if ((int)[cardPokerChip28 tag] == cardTag) {
+        return cardPokerChip28;
+    }
+    else if ((int)[cardPokerChip29 tag] == cardTag) {
+        return cardPokerChip29;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
