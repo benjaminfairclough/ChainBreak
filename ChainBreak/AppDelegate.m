@@ -462,12 +462,726 @@
             }
         }
     }
+    
+    if ([cardRestriction isEqualToString:@"Prime Numbers"]) {
+        //claim center card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
+        
+        // check top left card
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y-1][x-1] isPrime] ) {
+            
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
+        }
+        
+        // check top middle card
+        if((y-1) >= 0 && [thirtyCardDeck[y-1][x] isPrime] ) {
+            
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check top right card
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y-1][x+1] isPrime] ) {
+            
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check left card
+        if((x-1) >= 0 && [thirtyCardDeck[y][x-1] isPrime] ) {
+            
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check right card
+        if((x+1) <= 5 && [thirtyCardDeck[y][x+1] isPrime] ) {
+            
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom left card
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y+1][x-1] isPrime] ) {
+            
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom middle card
+        if((y+1) <= 4 && [thirtyCardDeck[y+1][x] isPrime] ) {
+            
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom right card
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y+1][x+1] isPrime] ) {
+            
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+    }
+    
+    // Multiples of 3
+    if ([cardRestriction isEqualToString:@"Multiples of 3"]) {
+        //claim center card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
+        
+        // check top left card
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y-1][x-1] checkIfMultipleOf3:[thirtyCardDeck[y-1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
+        }
+        
+        // check top middle card
+        if((y-1) >= 0 && [thirtyCardDeck[y-1][x] checkIfMultipleOf3:[thirtyCardDeck[y-1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check top right card
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y-1][x+1] checkIfMultipleOf3:[thirtyCardDeck[y-1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check left card
+        if((x-1) >= 0 && [thirtyCardDeck[y][x-1] checkIfMultipleOf3:[thirtyCardDeck[y][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check right card
+        if((x+1) <= 5 && [thirtyCardDeck[y][x+1] checkIfMultipleOf3:[thirtyCardDeck[y][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom left card
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y+1][x-1] checkIfMultipleOf3:[thirtyCardDeck[y+1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom middle card
+        if((y+1) <= 4 && [thirtyCardDeck[y+1][x] checkIfMultipleOf3:[thirtyCardDeck[y+1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom right card
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y+1][x+1] checkIfMultipleOf3:[thirtyCardDeck[y+1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+    }
+    
+    // Multiples of 4
+    if ([cardRestriction isEqualToString:@"Multiples of 4"]) {
+        //claim center card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
+        
+        // check top left card
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y-1][x-1] checkIfMultipleOf4:[thirtyCardDeck[y-1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
+        }
+        
+        // check top middle card
+        if((y-1) >= 0 && [thirtyCardDeck[y-1][x] checkIfMultipleOf4:[thirtyCardDeck[y-1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check top right card
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y-1][x+1] checkIfMultipleOf4:[thirtyCardDeck[y-1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check left card
+        if((x-1) >= 0 && [thirtyCardDeck[y][x-1] checkIfMultipleOf4:[thirtyCardDeck[y][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check right card
+        if((x+1) <= 5 && [thirtyCardDeck[y][x+1] checkIfMultipleOf4:[thirtyCardDeck[y][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom left card
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y+1][x-1] checkIfMultipleOf4:[thirtyCardDeck[y+1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom middle card
+        if((y+1) <= 4 && [thirtyCardDeck[y+1][x] checkIfMultipleOf4:[thirtyCardDeck[y+1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom right card
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y+1][x+1] checkIfMultipleOf4:[thirtyCardDeck[y+1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+    }
+    
+    // Multiples of 5
+    if ([cardRestriction isEqualToString:@"Multiples of 5"]) {
+        //claim center card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
+        
+        // check top left card
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y-1][x-1] checkIfMultipleOf5:[thirtyCardDeck[y-1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
+        }
+        
+        // check top middle card
+        if((y-1) >= 0 && [thirtyCardDeck[y-1][x] checkIfMultipleOf5:[thirtyCardDeck[y-1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check top right card
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y-1][x+1] checkIfMultipleOf5:[thirtyCardDeck[y-1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check left card
+        if((x-1) >= 0 && [thirtyCardDeck[y][x-1] checkIfMultipleOf5:[thirtyCardDeck[y][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check right card
+        if((x+1) <= 5 && [thirtyCardDeck[y][x+1] checkIfMultipleOf5:[thirtyCardDeck[y][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom left card
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y+1][x-1] checkIfMultipleOf5:[thirtyCardDeck[y+1][x-1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom middle card
+        if((y+1) <= 4 && [thirtyCardDeck[y+1][x] checkIfMultipleOf5:[thirtyCardDeck[y+1][x] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom right card
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y+1][x+1] checkIfMultipleOf5:[thirtyCardDeck[y+1][x+1] cValue]] ) {
+            
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+    }
+    
+    // Face Cards
+    if ([cardRestriction isEqualToString:@"Face Cards"]) {
+        //claim center card
+        [thirtyCardDeck[y][x] setOwnedById:[player playerId]];
+        
+        // set cardTag and pokerchip image
+        int cardTag = (y*6 + x);
+        if ([player playerId] == 1) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+        }
+        else if ([player playerId] == 2) {
+            [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+        }
+        
+        // check top left card
+        if((y-1) >= 0 && (x-1) >= 0 && [thirtyCardDeck[y-1][x-1] isFace] ) {
+            
+            [thirtyCardDeck[y-1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+            
+        }
+        
+        // check top middle card
+        if((y-1) >= 0 && [thirtyCardDeck[y-1][x] isFace] ) {
+            
+            [thirtyCardDeck[y-1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check top right card
+        if((y-1) >= 0 && (x+1) <= 5 && [thirtyCardDeck[y-1][x+1] isFace] ) {
+            
+            [thirtyCardDeck[y-1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y-1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check left card
+        if((x-1) >= 0 && [thirtyCardDeck[y][x-1] isFace] ) {
+            
+            [thirtyCardDeck[y][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check right card
+        if((x+1) <= 5 && [thirtyCardDeck[y][x+1] isFace] ) {
+            
+            [thirtyCardDeck[y][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom left card
+        if((y+1) <= 4 && (x-1) >= 0 && [thirtyCardDeck[y+1][x-1] isFace] ) {
+            
+            [thirtyCardDeck[y+1][x-1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x-1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom middle card
+        if((y+1) <= 4 && [thirtyCardDeck[y+1][x] isFace] ) {
+            
+            [thirtyCardDeck[y+1][x] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+        
+        // check bottom right card
+        if((y+1) <= 4 && (x+1) <= 5 && [thirtyCardDeck[y+1][x+1] isFace] ) {
+            
+            [thirtyCardDeck[y+1][x+1] setOwnedById:[player playerId]];
+            
+            // set cardTag and pokerchip image
+            cardTag = (((y+1)*6) + (x+1));
+            if ([player playerId] == 1) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Red.png"]];
+            }
+            else if ([player playerId] == 2) {
+                [[self searchForImageWithTag:cardTag] setImage:[NSImage imageNamed:@"PokerChip_Blue.png"]];
+            }
+        }
+    }
+}
+
+- (void)checkForWin {
+    if ([[self playerOne] score] + [[self playerTwo] score] == 30) {
+        if ([[self playerOne] score] > [[self playerTwo] score]) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Game Over"];
+            [alert setInformativeText:@"Player 1 Wins! You went first didn't you :P"];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        }
+        else if ([[self playerOne] score] < [[self playerTwo] score]) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Game Over"];
+            [alert setInformativeText:@"Player 2 Wins! You went first didn't you :P"];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        }
+        else {
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setMessageText:@"Game Over"];
+            [alert setInformativeText:@"It's a draw!"];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        }
+    }
 }
 
 - (void)updateGame {
     // update score
     [self calculatePlayerScores];
     [self updatePlayerPosition];
+    [self checkForWin];
     
     // disable player controls
     if (_currentPlayer == 1) {
@@ -492,13 +1206,13 @@
     }
     
     // enable player controls
-    // disable player controls
     if (_currentPlayer == 1) {
         [playerOneSelectedCard setEnabled:true];
         [playerOneSelectedCard setImage:nil];
         [playerOneSelectedCardMenu setEnabled:true];
         [playerOneClaimButton setEnabled:true];
         [_playerOne setHasSelectedCardForTurn:false];
+        [_window setDefaultButtonCell:[playerOneClaimButton cell]];
     }
     
     else if (_currentPlayer == 2) {
@@ -507,6 +1221,7 @@
         [playerTwoSelectedCardMenu setEnabled:true];
         [playerTwoClaimButton setEnabled:true];
         [_playerTwo setHasSelectedCardForTurn:false];
+        [_window setDefaultButtonCell:[playerTwoClaimButton cell]];
     }
     
 }

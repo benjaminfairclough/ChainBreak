@@ -155,6 +155,7 @@
 - (IBAction)playerCardSelect:(id)sender;
 - (IBAction)claimSpaces:(id)sender;
 - (void)checkSurroudingSpacesForCardWithPositionY:(int) y andPositionX:(int) x withOption:(NSString*) cardRestriction forPlayer:(Player*) player;
+- (void)checkForWin;
 - (void)updatePlayerPosition;
 - (void)updateGame;
 - (void)calculatePlayerScores;
