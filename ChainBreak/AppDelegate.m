@@ -1151,7 +1151,7 @@
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
             [alert setMessageText:@"Game Over"];
-            [alert setInformativeText:@"Player 1 Wins! You went first didn't you :P"];
+            [alert setInformativeText:@"Player 1 Wins!"];
             [alert setAlertStyle:NSWarningAlertStyle];
             
             [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
@@ -1160,7 +1160,7 @@
             NSAlert *alert = [[NSAlert alloc] init];
             [alert addButtonWithTitle:@"OK"];
             [alert setMessageText:@"Game Over"];
-            [alert setInformativeText:@"Player 2 Wins! You went first didn't you :P"];
+            [alert setInformativeText:@"Player 2 Wins!"];
             [alert setAlertStyle:NSWarningAlertStyle];
             
             [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
