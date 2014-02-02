@@ -22,10 +22,10 @@ the common link will now be claimed as yours. This includes cards that are claim
 by the other player.
 
 ## Controls/Keyboard Shortcuts
-<kbd>command</kbd> + <kbd>N</kbd> - New Game
-<kbd>command</kbd> + <kbd>1</kbd> - Select Same Suit
-<kbd>command</kbd> + <kbd>2</kbd> - Select Prime Numbers
-<kbd>command</kbd> + <kbd>3</kbd> - Select Multiples of 3
-<kbd>command</kbd> + <kbd>4</kbd> - Select Multiples of 4
-<kbd>command</kbd> + <kbd>5</kbd> - Select Multiples of 5
-<kbd>command</kbd> + <kbd>6</kbd> - Select Face Cards
+<kbd>command</kbd> + <kbd>N</kbd> - New Game  
+<kbd>command</kbd> + <kbd>1</kbd> - Select Same Suit  
+<kbd>command</kbd> + <kbd>2</kbd> - Select Prime Numbers  
+<kbd>command</kbd> + <kbd>3</kbd> - Select Multiples of 3  
+<kbd>command</kbd> + <kbd>4</kbd> - Select Multiples of 4  
+<kbd>command</kbd> + <kbd>5</kbd> - Select Multiples of 5  
+<kbd>command</kbd> + <kbd>6</kbd> - Select Face Cards  
