@@ -1,4 +1,4 @@
-ChainBreak - Strategy Card Game
+[ChainBreak - Strategy Card Game](http://www.benfairclough.com/project/Chain Break)
 ==========
 
 ![alt text](/ChainBreak/Resources/Images/ChainBreak-Hero.png "Screenshot of Chain Break")
